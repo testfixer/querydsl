@@ -3,7 +3,7 @@ mysql:
   ports:
     - "3306:3306"
   volumes:
-    - ./mysql.sh:/docker-entrypoint-initdb.d/mysql.sh
+    - ./docker/mysql.sh:/docker-entrypoint-initdb.d/mysql.sh
   environment:
     - MYSQL_ROOT_PASSWORD=querydsl
     - MYSQL_USER=querydsl
@@ -14,16 +14,11 @@ postgresql:
   ports:
     - "5433:5432"
   volumes:
-    - ./postgresql.sql:/docker-entrypoint-initdb.d/postgresql.sql
+    - ./docker/postgresql.sql:/docker-entrypoint-initdb.d/postgresql.sql
   environment:
     - POSTGRES_USER=querydsl
     - POSTGRES_PASSWORD=querydsl
     - POSTGRES_DB=querydsl
-
-oracle:
-  image: wnameless/oracle-xe-11g:16.04
-  ports:
-    - "1521:1521"
 
 cubrid:
   image: lighthopper/cubrid:9.2.26.0004
@@ -40,7 +35,7 @@ mongo:
     - "27017:27017"
 
 db2:
-  image: ibmcom/db2express-c:10.5.0.5-3.10.0
+  image: ibmcom/db2:11.5.0.0
   ports:
     - "50000:50000"
   environment:

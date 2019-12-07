@@ -1177,7 +1177,7 @@ public class SelectBase extends AbstractBaseTest {
     }
 
     @Test
-    @ExcludeIn(FIREBIRD) // FIXME
+    @ExcludeIn({FIREBIRD, SQLSERVER})
     public void math2() {
         math(Expressions.constant(0.5));
     }
@@ -1199,11 +1199,7 @@ public class SelectBase extends AbstractBaseTest {
         assertEquals(Math.exp(0.5),  firstResult(MathExpressions.exp(expr)), precision);
         assertEquals(Math.log(0.5),  firstResult(MathExpressions.ln(expr)), precision);
         assertEquals(log(0.5, 10),   firstResult(MathExpressions.log(expr, 10)), precision);
-        if(target == SQLSERVER){
-            assertEquals(0.3,           firstResult(MathExpressions.power(expr, 2)), precision);
-        } else {
-            assertEquals(0.25, firstResult(MathExpressions.power(expr, 2)), precision);
-        }
+        assertEquals(0.25, firstResult(MathExpressions.power(expr, 2)), precision);
         assertEquals(radians(0.5),   firstResult(MathExpressions.radians(expr)), precision);
         assertEquals(Integer.valueOf(1),
                 firstResult(MathExpressions.sign(expr)));
@@ -2123,7 +2119,7 @@ public class SelectBase extends AbstractBaseTest {
     }
 
     @Test
-    @ExcludeIn(DERBY)
+    @ExcludeIn({DERBY, SQLSERVER})
     public void groupConcat() {
         List<String> expected = ImmutableList.of("Mike,Mary", "Joe,Peter,Steve,Jim", "Jennifer,Helen,Daisy,Barbara");
         if (Connections.getTarget() == POSTGRESQL) {
@@ -2137,7 +2133,7 @@ public class SelectBase extends AbstractBaseTest {
     }
 
     @Test
-    @ExcludeIn(DERBY)
+    @ExcludeIn({DERBY, SQLSERVER})
     public void groupConcat2() {
         List<String> expected = ImmutableList.of("Mike-Mary", "Joe-Peter-Steve-Jim", "Jennifer-Helen-Daisy-Barbara");
         if (Connections.getTarget() == POSTGRESQL) {

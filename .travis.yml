@@ -14,7 +14,7 @@ env:
     - secure: N1ysx2ZX6sZrBk2UWIdP6MDVyAvenD6R4ghUQkzkkRjF//LOKwSTFImE63ChXTy/e3VjC338NbZo+KQkAviJIGIhDXau/daYSd9mH9tOROJlJf7kJBJAiUWOV8vrwomRplmkkZdzgpS/5O9nxKloanFLR799UIYDKF8FwMJo5x4=
 install: mvn clean install -DskipTests
 before_script:
-  - docker-compose --file travis/docker-compose.yml up --detach mysql postgresql mongo
+  - docker-compose up --detach mysql postgresql sqlserver mongo
 script:
   - mvn --batch-mode verify -am jacoco:report ${ARGS}
 deploy:
